@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Contenedor principal */
+        .hero-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- BOTÓN CERRAR SESIÓN (esquina superior derecha) --- */
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            z-index: 50;
+            display: none; /* Oculto por defecto */
+        }
+
+        .logout-btn.visible {
+            display: block;
+        }
+
+        .logout-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+        }
+
+        .logout-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* Textos */
+        .text-container {
+            text-align: center;
+            margin-bottom: 15px;
+            z-index: 2;
+        }
+
+        .text-container h1 {
+            font-size: 64px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -1px;
+            color: #ffffff;
+            transition: color 0.3s ease;
+        }
+
+        .text-container h2 {
+            font-size: 28px;
+            font-weight: 400;
+            margin: 10px 0 0 0;
+            color: #86868b;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .text-container h2:hover {
+            color: #ffffff;
+        }
+
+        .welcome-message {
+            font-size: 28px;
+            color: #25D366;
+            margin: 10px 0 0 0;
+            font-weight: 600;
+            display: none;
+        }
+
+        .welcome-message.visible {
+            display: block;
+        }
+
+        .text-container h2.hidden {
+            display: none;
+        }
+
+        /* --- EL FANTASMA --- */
+        .ghost-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 4s ease-in-out infinite;
+            cursor: pointer;
+            z-index: 2;
+            margin-bottom: 15px;
+        }
+
+        .ghost {
+            position: relative;
+            width: 240px;
+            height: 310px;
+            background: linear-gradient(135deg, #f4aab9 0%, #b8c6db 50%, #4a6fa5 100%);
+            border-radius: 50%;
+            box-shadow:
+                inset -25px -25px 50px rgba(0,0,0,0.3),
+                inset 25px 25px 50px rgba(255,255,255,0.7),
+                0 0 80px rgba(184, 198, 219, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ghost:hover {
+            transform: scale(1.03);
+            box-shadow:
+                inset -25px -25px 50px rgba(0,0,0,0.3),
+                inset 25px 25px 50px rgba(255,255,255,0.7),
+                0 0 110px rgba(244, 170, 185, 0.6);
+        }
+
+        .eyes {
+            display: flex;
+            gap: 50px;
+            margin-top: -20px;
+            z-index: 3;
+        }
+
+        .eye {
+            width: 55px;
+            height: 70px;
+            background-color: #000;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .pupil {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(255,255,255,0.6);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s ease-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* --- BOTÓN PRINCIPAL --- */
+        .btn-empezar {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 22px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            z-index: 2;
+            margin-bottom: 25px;
+        }
+
+        .btn-empezar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .btn-empezar:active {
+            transform: scale(0.98);
+        }
+
+        /* --- ICONOS DE REDES SOCIALES --- */
+        .social-container {
+            display: flex;
+            gap: 25px;
+            z-index: 10;
+            margin-bottom: 30px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .social-container:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            fill: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.15) translateY(-4px);
+        }
+
+        /* --- VENTANA MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: rgba(30, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 40px 50px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            transform: scale(0.8) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-box h3 {
+            font-size: 26px;
+            font-weight: 600;
+            margin: 0 0 5px 0;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        /* --- FORMULARIO --- */
+        .form-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            color: #86868b;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.07);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.3s ease, background 0.3s ease;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            border: 1px solid #25D366;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .form-group input::placeholder {
+            color: #555;
+        }
+
+        .error-message {
+            font-size: 12px;
+            color: #ff6b6b;
+            margin-top: -2px;
+            display: none;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        .btn-modal {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin-top: 5px;
+        }
+
+        .btn-registrarse {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+
+        .btn-registrarse:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-iniciar {
+            background: linear-gradient(135deg, #4a6fa5, #2c3e50);
+        }
+
+        .btn-iniciar:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-crear {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+
+        .btn-crear:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-volver {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #86868b;
+            box-shadow: none;
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        .btn-volver:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+        }
+
+        .modal-separator {
+            font-size: 16px;
+            color: #86868b;
+            margin: 2px 0;
+            font-weight: 300;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #86868b;
+            font-size: 30px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: #ffffff;
+        }
+
+        .panel {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .panel.active {
+            display: flex;
+        }
+
+        .success-message {
+            background: rgba(37, 211, 102, 0.2);
+            border: 1px solid rgba(37, 211, 102, 0.5);
+            color: #25D366;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .success-message.visible {
+            display: block;
+        }
+
+        /* Luces de fondo decorativas */
+        .glow-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .glow-pink {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(244, 170, 185, 0.15) 0%, transparent 70%);
+            position: absolute;
+            left: 15%;
+            top: 30%;
+        }
+
+        .glow-blue {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(74, 111, 165, 0.15) 0%, transparent 70%);
+            position: absolute;
+            right: 15%;
+            top: 40%;
+        }
+
+        /* ===================================================== */
+        /* --- PANTALLA DE CHAT TIPO DEEPSEEK --- */
+        /* ===================================================== */
+        .chat-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0d0d0d;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .chat-screen.active {
+            transform: translateY(0);
+        }
+
+        /* Cabecera del chat */
+        .chat-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: #0d0d0d;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            flex-shrink: 0;
+        }
+
+        .chat-back-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 5px 15px 5px 0;
+            transition: transform 0.2s ease, color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .chat-back-btn:hover {
+            color: #25D366;
+            transform: translateX(-3px);
+        }
+
+        /* SVG de la flecha de retroceso */
+        .chat-back-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .chat-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+            margin-left: 5px;
+        }
+
+        /* Área de mensajes */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #333 transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+
+        /* Mensaje del sistema (bienvenida) */
+        .chat-welcome {
+            text-align: center;
+            padding: 40px 20px;
+            color: #86868b;
+        }
+
+        .chat-welcome .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #25D366;
+}
+
+.chat-welcome .icon svg {
+    width: 60px;
+    height: 60px;
+    stroke: #25D366;
+}
+
+        .chat-welcome h4 {
+            font-size: 22px;
+            color: #ffffff;
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .chat-welcome p {
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Burbujas de mensajes */
+        .message {
+            max-width: 80%;
+            padding: 14px 20px;
+            border-radius: 20px;
+            font-size: 15px;
+            line-height: 1.5;
+            word-wrap: break-word;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            background: #2b5e3a;
+            color: #ffffff;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.ai {
+            background: #1e1e1e;
+            color: #e0e0e0;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* ===================================================== */
+        /* --- BARRA DE ENTRADA TIPO DEEPSEEK --- */
+        /* ===================================================== */
+                .chat-input-area {
+            padding: 15px 20px 25px 20px;
+            background: #0d0d0d;
+            flex-shrink: 0;
+        }
+
+        /* NUEVO: Archivos precargados arriba de la barra */
+        .attached-files {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-width: 900px;
+            margin: 0 auto 10px auto;
+        }
+
+        .attached-files:empty {
+            display: none;
+        }
+
+        .attached-file-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1e1e1e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 8px 12px;
+            font-size: 13px;
+            color: #e0e0e0;
+            max-width: 220px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .attached-file-chip .file-icon {
+            width: 18px;
+            height: 18px;
+            stroke: #25D366;
+            flex-shrink: 0;
+        }
+
+        .attached-file-chip .file-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+        }
+
+        .attached-file-chip .remove-file {
+            background: none;
+            border: none;
+            color: #86868b;
+            font-size: 18px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0 0 0 5px;
+            transition: color 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .attached-file-chip .remove-file:hover {
+            color: #ff6b6b;
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            background: #1e1e1e;
+            border-radius: 25px;
+            padding: 8px 10px 8px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: border 0.3s ease;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .input-wrapper:focus-within {
+            border: 1px solid #25D366;
+        }
+
+        /* Botón + para adjuntar */
+        .btn-attach {
+            background: none;
+            border: none;
+            color: #86868b;
+            font-size: 26px;
+            cursor: pointer;
+            padding: 0 5px;
+            transition: color 0.2s ease, transform 0.2s ease;
+            line-height: 1;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+        }
+
+        .btn-attach:hover {
+            color: #25D366;
+            transform: scale(1.15);
+        }
+
+        /* Input de texto */
+        .chat-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-family: inherit;
+            outline: none;
+            padding: 10px 5px;
+            resize: none;
+            max-height: 120px;
+            line-height: 1.5;
+            scrollbar-width: thin;
+            scrollbar-color: #444 transparent;
+        }
+
+        .chat-input::placeholder {
+            color: #555;
+        }
+
+        .chat-input::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chat-input::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 2px;
+        }
+
+        /* Botón enviar (flecha ↑ con SVG) */
+        .btn-send {
+            background: #25D366;
+            border: none;
+            color: #000000;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+        }
+
+        .btn-send:hover {
+            transform: scale(1.1);
+            background: #2ee87a;
+        }
+
+        .btn-send:active {
+            transform: scale(0.95);
+        }
+
+        .btn-send:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* SVG de la flecha de enviar */
+        .btn-send svg {
+            width: 20px;
+            height: 20px;
+            stroke: #000000;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ===================================================== */
+        /* --- MODAL DE OPCIONES (Marketing / Automatización) --- */
+        /* ===================================================== */
+        .options-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 150;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .options-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .options-box {
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 45px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.85) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .options-overlay.active .options-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .options-box h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+        }
+
+        .options-box p {
+            color: #86868b;
+            font-size: 15px;
+            margin: 0 0 10px 0;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 22px 25px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+            color: white;
+            font-family: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .option-btn:hover {
+            background: rgba(37, 211, 102, 0.15);
+            border: 1px solid #25D366;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.2);
+        }
+
+        .option-btn .option-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option-btn .option-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+        .option-btn .option-desc {
+            font-size: 14px;
+            color: #86868b;
+            font-weight: 400;
+        }
+
+        .option-btn:hover .option-desc {
+            color: #b0b0b0;
+        }
+
+        .close-options {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #86868b;
+            font-size: 30px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .close-options:hover {
+            color: #ffffff;
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .text-container h1 {
+                font-size: 48px;
+            }
+            .text-container h2, .welcome-message {
+                font-size: 22px;
+            }
+            .ghost-container {
+                width: 250px;
+                height: 250px;
+            }
+            .ghost {
+                width: 200px;
+                height: 260px;
+            }
+            .eye {
+                width: 45px;
+                height: 58px;
+            }
+            .pupil {
+                width: 16px;
+                height: 16px;
+            }
+            .eyes {
+                gap: 40px;
+            }
+            .btn-empezar {
+                font-size: 18px;
+                padding: 14px 35px;
+            }
+            .social-container {
+                gap: 18px;
+                padding: 12px 20px;
+            }
+            .social-icon {
+                width: 32px;
+                height: 32px;
+            }
+            .modal-box {
+                padding: 30px 25px;
+            }
+            .options-box {
+                padding: 35px 25px;
+            }
+            .chat-messages {
+                padding: 20px 15px;
+            }
+            .chat-input-area {
+                padding: 10px 15px 20px 15px;
+            }
+            .logout-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+                top: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- BOTÓN CERRAR SESIÓN (esquina superior derecha) -->
+    <button class="logout-btn" id="logoutBtn">Cerrar Sesión</button>
+
+    <div class="hero-section">
+        
+        <div class="text-container">
+            <h1 id="mainTitle">Marketing</h1>
+            <h2 id="subtitulo">Pruébame</h2>
+            <div class="welcome-message" id="welcomeMsg"></div>
+        </div>
+
+        <!-- El Fantasma -->
+        <div class="ghost-container" id="ghostBtn">
+            <div class="ghost" id="ghostBody">
+                <div class="eyes">
+                    <div class="eye">
+                        <div class="pupil" id="pupil1"></div>
+                    </div>
+                    <div class="eye">
+                        <div class="pupil" id="pupil2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón Principal -->
+        <button class="btn-empezar" id="btnPrincipal">Iniciar Sesión o Registrarse</button>
+
+        <!-- ICONOS DE REDES SOCIALES -->
+        <div class="social-container">
+            <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+            </svg>
+            <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+            </svg>
+        </div>
+
+        <div class="glow-bg">
+            <div class="glow-pink"></div>
+            <div class="glow-blue"></div>
+        </div>
+
+    </div>
+
+    <!-- VENTANA MODAL (registro / login) -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box">
+            <button class="close-modal" id="closeModal">&times;</button>
+            
+            <div class="panel active" id="panelInicio">
+                <h3>Bienvenido</h3>
+                <button class="btn-modal btn-registrarse" id="btnRegistrarse">Registrarse</button>
+                <div class="modal-separator">o</div>
+                <button class="btn-modal btn-iniciar" id="btnIniciar">Iniciar Sesión</button>
+            </div>
+
+            <div class="panel" id="panelRegistro">
+                <h3>Crear Cuenta</h3>
+                <div class="form-group">
+                    <label for="regNombre">Nombre</label>
+                    <input type="text" id="regNombre" placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <label for="regApellido">Apellido</label>
+                    <input type="text" id="regApellido" placeholder="Tu apellido">
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Correo Electrónico</label>
+                    <input type="email" id="regEmail" placeholder="tucorreo@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Contraseña</label>
+                    <input type="password" id="regPassword" placeholder="Crea una contraseña">
+                </div>
+                <div class="form-group">
+                    <label for="regPasswordConfirm">Repite la contraseña</label>
+                    <input type="password" id="regPasswordConfirm" placeholder="Repite la contraseña">
+                    <span class="error-message" id="errorPassword">Las contraseñas no coinciden</span>
+                </div>
+                <button class="btn-modal btn-crear" id="btnCrearCuenta">Crear Cuenta</button>
+                <button class="btn-modal btn-volver" id="btnVolver">Volver</button>
+                <div class="success-message" id="successMessage">¡Cuenta Creada!</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL DE OPCIONES (Marketing / Automatización) -->
+    <div class="options-overlay" id="optionsOverlay">
+        <div class="options-box">
+            <button class="close-options" id="closeOptions">&times;</button>
+            <h3>¿Qué deseas hacer?</h3>
+            <p>Elige una opción para comenzar</p>
+
+            <button class="option-btn" id="optMarketing">
+                <span class="option-title">
+    <svg class="option-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+    </svg>
+    Marketing
+</span>
+                <span class="option-desc">Crea campañas, contenido y estrategias con IA</span>
+            </button>
+
+            <button class="option-btn" id="optAutomatizacion">
+                <span class="option-title">
+    <svg class="option-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="8" width="16" height="12" rx="3" ry="3"></rect>
+        <line x1="9" y1="13" x2="9.01" y2="13"></line>
+        <line x1="15" y1="13" x2="15.01" y2="13"></line>
+        <path d="M9 17h6"></path>
+        <line x1="12" y1="8" x2="12" y2="4"></line>
+        <circle cx="12" cy="3" r="1"></circle>
+    </svg>
+    Automatización de IA
+</span>
+                <span class="option-desc">Agentes inteligentes para WhatsApp y otros canales</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE CHAT TIPO DEEPSEEK -->
+    <div class="chat-screen" id="chatScreen">
+        <!-- Cabecera -->
+        <div class="chat-header">
+            <button class="chat-back-btn" id="chatBackBtn" title="Volver">
+                <!-- Icono SVG: Flecha hacia la izquierda -->
+                <svg viewBox="0 0 24 24">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="chat-title" id="chatTitle">Marketing</div>
+        </div>
+
+        <!-- Mensajes -->
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-welcome" id="chatWelcome">
+                <span class="icon">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+    </svg>
+</span>
+                <h4 id="chatWelcomeTitle">¿En qué puedo ayudarte?</h4>
+                <p id="chatWelcomeText">Cuéntame sobre tu negocio, producto o servicio y te ayudaré a crear una estrategia de marketing personalizada.</p>
+            </div>
+        </div>
+
+        <!-- Barra de entrada -->
+        <div class="chat-input-area">
+    <!-- NUEVO: Contenedor de archivos precargados -->
+    <div class="attached-files" id="attachedFiles"></div>
+
+    <div class="input-wrapper">
+                <button class="btn-attach" id="btnAttach" title="Adjuntar archivo">+</button>
+                <textarea class="chat-input" id="chatInput" placeholder="Escribe un mensaje..." rows="1"></textarea>
+                <button class="btn-send" id="btnSend" title="Enviar">
+                    <!-- Icono SVG: Flecha hacia arriba -->
+                    <svg viewBox="0 0 24 24">
+                        <line x1="12" y1="19" x2="12" y2="5"></line>
+                        <polyline points="5 12 12 5 19 12"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+                // --- 0. CONEXIÓN A SUPABASE ---
+        const SUPABASE_URL = 'https://znqmtaqgudoiuhlnobjx.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpucW10YXFndWRvaXVobG5vYmp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNDczMTUsImV4cCI6MjEwNTkyMzMxNX0.hl_oCRMkryYFz2WseBUINTH9jurqfijJgF_-4_ksizY';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // --- 1. SONIDO TIERNO FUTURISTA ---
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playGhostSound() {
+            initAudio();
+            if (!audioCtx) return;
+
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, now);
+            osc.frequency.exponentialRampToValueAtTime(1200, now + 0.1);
+            osc.frequency.exponentialRampToValueAtTime(900, now + 0.3);
+
+            const vibrato = audioCtx.createOscillator();
+            vibrato.type = 'sine';
+            vibrato.frequency.value = 15;
+            const vibratoGain = audioCtx.createGain();
+            vibratoGain.gain.value = 20;
+            vibrato.connect(vibratoGain);
+            vibratoGain.connect(osc.frequency);
+
+            const gainNode = audioCtx.createGain();
+            gainNode.gain.setValueAtTime(0, now);
+            gainNode.gain.linearRampToValueAtTime(0.15, now + 0.02);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.value = 3000;
+            filter.Q.value = 1;
+
+            osc.connect(filter);
+            filter.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            osc.start(now);
+            osc.stop(now + 0.4);
+            vibrato.start(now);
+            vibrato.stop(now + 0.4);
+        }
+
+        const ghost = document.getElementById('ghostBtn');
+        ghost.addEventListener('mouseenter', playGhostSound);
+        ghost.addEventListener('click', playGhostSound);
+
+        // --- 2. OJOS QUE SIGUEN AL MOUSE ---
+        const pupil1 = document.getElementById('pupil1');
+        const pupil2 = document.getElementById('pupil2');
+        const ghostBody = document.getElementById('ghostBody');
+
+        const eyeWidth = 55;
+        const eyeHeight = 70;
+        const pupilSize = 20;
+        const maxRadiusX = (eyeWidth / 2) - (pupilSize / 2);
+        const maxRadiusY = (eyeHeight / 2) - (pupilSize / 2);
+        const maxDistance = 300;
+
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            const ghostRect = ghostBody.getBoundingClientRect();
+            const ghostCenterX = ghostRect.left + ghostRect.width / 2;
+            const ghostCenterY = ghostRect.top + ghostRect.height / 2;
+
+            const deltaX = mouseX - ghostCenterX;
+            const deltaY = mouseY - ghostCenterY;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+            const intensity = Math.min(distance / maxDistance, 1);
+
+            let dirX = 0;
+            let dirY = 0;
+            if (distance > 0) {
+                dirX = deltaX / distance;
+                dirY = deltaY / distance;
+            }
+
+            const cos = dirX;
+            const sin = dirY;
+            const radius = 1 / Math.sqrt(
+                (cos * cos) / (maxRadiusX * maxRadiusX) +
+                (sin * sin) / (maxRadiusY * maxRadiusY)
+            );
+
+            const moveX = dirX * radius * intensity;
+            const moveY = dirY * radius * intensity;
+
+            pupil1.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+            pupil2.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+        });
+
+        // --- 3. VARIABLES GLOBALES ---
+        const btnPrincipal = document.getElementById('btnPrincipal');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModal = document.getElementById('closeModal');
+        const btnRegistrarse = document.getElementById('btnRegistrarse');
+        const btnIniciar = document.getElementById('btnIniciar');
+        const btnCrearCuenta = document.getElementById('btnCrearCuenta');
+        const btnVolver = document.getElementById('btnVolver');
+
+        const panelInicio = document.getElementById('panelInicio');
+        const panelRegistro = document.getElementById('panelRegistro');
+
+        const regNombre = document.getElementById('regNombre');
+        const regApellido = document.getElementById('regApellido');
+        const regEmail = document.getElementById('regEmail');
+        const regPassword = document.getElementById('regPassword');
+        const regPasswordConfirm = document.getElementById('regPasswordConfirm');
+        const errorPassword = document.getElementById('errorPassword');
+        const successMessage = document.getElementById('successMessage');
+
+        const welcomeMsg = document.getElementById('welcomeMsg');
+        const subtitulo = document.getElementById('subtitulo');
+
+        const optionsOverlay = document.getElementById('optionsOverlay');
+        const closeOptions = document.getElementById('closeOptions');
+        const optMarketing = document.getElementById('optMarketing');
+        const optAutomatizacion = document.getElementById('optAutomatizacion');
+
+        const chatScreen = document.getElementById('chatScreen');
+        const chatBackBtn = document.getElementById('chatBackBtn');
+        const chatTitle = document.getElementById('chatTitle');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatWelcome = document.getElementById('chatWelcome');
+        const chatWelcomeTitle = document.getElementById('chatWelcomeTitle');
+        const chatWelcomeText = document.getElementById('chatWelcomeText');
+        const chatInput = document.getElementById('chatInput');
+        const btnSend = document.getElementById('btnSend');
+        const btnAttach = document.getElementById('btnAttach');
+
+        let usuarioLogueado = false;
+
+        // --- 4. FUNCIONES DE ESTADO ---
+        function actualizarEstadoUsuario(nombre) {
+            usuarioLogueado = true;
+            subtitulo.classList.add('hidden');
+            welcomeMsg.textContent = `¡Hola, ${nombre}!`;
+            welcomeMsg.classList.add('visible');
+            btnPrincipal.textContent = '¡Empezar!';
+            logoutBtn.classList.add('visible'); // Mostrar botón cerrar sesión
+        }
+
+        function estadoInvitado() {
+            usuarioLogueado = false;
+            subtitulo.classList.remove('hidden');
+            welcomeMsg.classList.remove('visible');
+            btnPrincipal.textContent = 'Iniciar Sesión o Registrarse';
+            logoutBtn.classList.remove('visible'); // Ocultar botón cerrar sesión
+        }
+
+        // --- 5. BOTÓN PRINCIPAL ---
+        btnPrincipal.addEventListener('click', () => {
+            if (usuarioLogueado) {
+                optionsOverlay.classList.add('active');
+            } else {
+                modalOverlay.classList.add('active');
+                panelInicio.classList.add('active');
+                panelRegistro.classList.remove('active');
+            }
+        });
+
+        // --- 6. BOTÓN CERRAR SESIÓN ---
+                logoutBtn.addEventListener('click', async () => {
+            // 🔥 CERRAR SESIÓN REAL EN SUPABASE
+            await supabaseClient.auth.signOut();
+            
+            // Volver al estado inicial
+            estadoInvitado();
+            
+            // Cerrar cualquier ventana abierta
+            modalOverlay.classList.remove('active');
+            optionsOverlay.classList.remove('active');
+            chatScreen.classList.remove('active');
+            
+            // Resetear formulario
+            resetearFormulario();
+        });
+
+        // --- 7. MODAL DE REGISTRO/LOGIN ---
+        closeModal.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+            resetearFormulario();
+        });
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+                resetearFormulario();
+            }
+        });
+
+        btnRegistrarse.addEventListener('click', () => {
+            panelInicio.classList.remove('active');
+            panelRegistro.classList.add('active');
+        });
+
+        btnVolver.addEventListener('click', () => {
+            panelRegistro.classList.remove('active');
+            panelInicio.classList.add('active');
+            resetearFormulario();
+        });
+
+        regPasswordConfirm.addEventListener('input', () => {
+            if (regPasswordConfirm.value !== regPassword.value && regPasswordConfirm.value !== '') {
+                errorPassword.classList.add('visible');
+            } else {
+                errorPassword.classList.remove('visible');
+            }
+        });
+
+        function resetearFormulario() {
+            regNombre.value = '';
+            regApellido.value = '';
+            regEmail.value = '';
+            regPassword.value = '';
+            regPasswordConfirm.value = '';
+            errorPassword.classList.remove('visible');
+            successMessage.classList.remove('visible');
+        }
+
+                btnCrearCuenta.addEventListener('click', async () => {
+            // Validaciones básicas
+            if (regNombre.value.trim() === '' || 
+                regApellido.value.trim() === '' || 
+                regEmail.value.trim() === '' || 
+                regPassword.value.trim() === '') {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            if (!regEmail.value.includes('@') || !regEmail.value.includes('.')) {
+                alert("Por favor, ingresa un correo electrónico válido.");
+                return;
+            }
+
+            if (regPassword.value !== regPasswordConfirm.value) {
+                errorPassword.classList.add('visible');
+                return;
+            }
+
+            // Deshabilitar el botón mientras se procesa
+            btnCrearCuenta.textContent = 'Creando cuenta...';
+            btnCrearCuenta.disabled = true;
+
+            // 🔥 REGISTRO REAL EN SUPABASE
+            const { data, error } = await supabaseClient.auth.signUp({
+                email: regEmail.value.trim(),
+                password: regPassword.value.trim(),
+                options: {
+                    data: {
+                        nombre: regNombre.value.trim(),
+                        apellido: regApellido.value.trim()
+                    }
+                }
+            });
+
+            // Volver a habilitar el botón
+            btnCrearCuenta.textContent = 'Crear Cuenta';
+            btnCrearCuenta.disabled = false;
+
+            // Si hubo error
+            if (error) {
+                console.error('Error al registrar:', error.message);
+                alert('Error al crear la cuenta: ' + error.message);
+                return;
+            }
+
+            // Cuenta creada con éxito
+            console.log('Usuario registrado:', data.user);
+            successMessage.classList.add('visible');
+            actualizarEstadoUsuario(regNombre.value.trim());
+
+            setTimeout(() => {
+                modalOverlay.classList.remove('active');
+                resetearFormulario();
+            }, 1500);
+        });
+
+                btnIniciar.addEventListener('click', async () => {
+            // Pedimos email y contraseña al usuario
+            const emailLogin = prompt("Ingresa tu correo electrónico:");
+            if (!emailLogin) return;
+            
+            const passwordLogin = prompt("Ingresa tu contraseña:");
+            if (!passwordLogin) return;
+
+            // 🔥 LOGIN REAL EN SUPABASE
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: emailLogin.trim(),
+                password: passwordLogin
+            });
+
+            if (error) {
+                console.error('Error al iniciar sesión:', error.message);
+                alert('Error al iniciar sesión: ' + error.message);
+                return;
+            }
+
+            // Login exitoso
+            console.log('Usuario logueado:', data.user);
+            const nombre = data.user.user_metadata?.nombre || 'Usuario';
+            actualizarEstadoUsuario(nombre);
+            modalOverlay.classList.remove('active');
+        });
+
+        // --- 8. MODAL DE OPCIONES ---
+        closeOptions.addEventListener('click', () => {
+            optionsOverlay.classList.remove('active');
+        });
+
+        optionsOverlay.addEventListener('click', (e) => {
+            if (e.target === optionsOverlay) {
+                optionsOverlay.classList.remove('active');
+            }
+        });
+
+        // --- 9. ABRIR CHAT SEGÚN OPCIÓN ---
+        function abrirChat(tipo) {
+            optionsOverlay.classList.remove('active');
+            
+            const mensajesAntiguos = chatMessages.querySelectorAll('.message');
+            mensajesAntiguos.forEach(m => m.remove());
+            
+            if (tipo === 'marketing') {
+                chatTitle.textContent = 'Marketing';
+                chatWelcomeTitle.textContent = '¿En qué puedo ayudarte?';
+                chatWelcomeText.textContent = 'Cuéntame sobre tu negocio, producto o servicio y te ayudaré a crear una estrategia de marketing personalizada.';
+            } else {
+                chatTitle.textContent = 'Automatización de IA';
+                chatWelcomeTitle.textContent = 'Automatiza tu atención';
+                chatWelcomeText.textContent = 'Describe qué proceso quieres automatizar (WhatsApp, Instagram, etc.) y te ayudaré a diseñar tu agente inteligente.';
+            }
+            
+            chatWelcome.style.display = 'block';
+            chatScreen.classList.add('active');
+            
+            setTimeout(() => chatInput.focus(), 400);
+        }
+
+        optMarketing.addEventListener('click', () => abrirChat('marketing'));
+        optAutomatizacion.addEventListener('click', () => abrirChat('automatizacion'));
+
+        // --- 10. CERRAR CHAT ---
+        chatBackBtn.addEventListener('click', () => {
+            chatScreen.classList.remove('active');
+        });
+
+        // --- 11. ENVIAR MENSAJE ---
+        function enviarMensaje() {
+            const texto = chatInput.value.trim();
+            if (texto === '') return;
+
+            if (chatWelcome) chatWelcome.style.display = 'none';
+
+            const msgUsuario = document.createElement('div');
+            msgUsuario.className = 'message user';
+            msgUsuario.textContent = texto;
+            chatMessages.appendChild(msgUsuario);
+
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            setTimeout(() => {
+                const msgIA = document.createElement('div');
+                msgIA.className = 'message ai';
+                msgIA.textContent = '¡Entendido! Estoy procesando tu solicitud. En breve tendrás una respuesta personalizada. (Esta es una respuesta simulada, después conectaremos la IA real).';
+                chatMessages.appendChild(msgIA);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 800);
+        }
+
+        btnSend.addEventListener('click', enviarMensaje);
+
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                enviarMensaje();
+            }
+        });
+
+        chatInput.addEventListener('input', () => {
+            chatInput.style.height = 'auto';
+            chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
+        });
+
+                // --- 12. BOTÓN ADJUNTAR (con precarga tipo DeepSeek) ---
+        const attachedFilesContainer = document.getElementById('attachedFiles');
+        let archivosPrecargados = [];
+
+        btnAttach.addEventListener('click', () => {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*,video/*,.pdf,.doc,.docx,.txt';
+            fileInput.multiple = true;
+            
+            fileInput.addEventListener('change', (e) => {
+                const files = e.target.files;
+                for (let i = 0; i < files.length; i++) {
+                    agregarArchivoPrecargado(files[i]);
+                }
+            });
+            
+            fileInput.click();
+        });
+
+        function agregarArchivoPrecargado(file) {
+            const chip = document.createElement('div');
+            chip.className = 'attached-file-chip';
+            
+            let iconoSVG = '';
+            if (file.type.startsWith('image/')) {
+                iconoSVG = `<svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>`;
+            } else if (file.type.startsWith('video/')) {
+                iconoSVG = `<svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>`;
+            } else {
+                iconoSVG = `<svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>`;
+            }
+            
+            chip.innerHTML = `
+                ${iconoSVG}
+                <span class="file-name">${file.name}</span>
+                <button class="remove-file" title="Quitar">&times;</button>
+            `;
+            
+            chip.querySelector('.remove-file').addEventListener('click', () => {
+                chip.remove();
+                archivosPrecargados = archivosPrecargados.filter(f => f !== file);
+            });
+            
+            attachedFilesContainer.appendChild(chip);
+            archivosPrecargados.push(file);
+        }
+
+        // Redefinimos la función enviarMensaje original para incluir archivos precargados
+        const enviarMensajeOriginal = enviarMensaje;
+        enviarMensaje = function() {
+            const texto = chatInput.value.trim();
+            const tieneArchivos = archivosPrecargados.length > 0;
+            
+            if (texto === '' && !tieneArchivos) return;
+            
+            if (chatWelcome) chatWelcome.style.display = 'none';
+            
+            const msgUsuario = document.createElement('div');
+            msgUsuario.className = 'message user';
+            
+            // Icono SVG de clip (no emoji)
+            const clipSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:4px;stroke:#25D366;"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>`;
+            
+            if (tieneArchivos) {
+                let textoArchivos = '';
+                archivosPrecargados.forEach(f => {
+                    textoArchivos += clipSVG + f.name + '\n';
+                });
+                msgUsuario.innerHTML = textoArchivos.replace(/\n/g, '<br>') + (texto ? '<br><br>' + texto : '');
+            } else {
+                msgUsuario.textContent = texto;
+            }
+            
+            chatMessages.appendChild(msgUsuario);
+            
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+            attachedFilesContainer.innerHTML = '';
+            archivosPrecargados = [];
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            setTimeout(() => {
+                const msgIA = document.createElement('div');
+                msgIA.className = 'message ai';
+                if (tieneArchivos) {
+                    msgIA.textContent = 'He recibido tus archivos. ¿Qué quieres que haga con ellos?';
+                } else {
+                    msgIA.textContent = '¡Entendido! Estoy procesando tu solicitud. En breve tendrás una respuesta personalizada.';
+                }
+                chatMessages.appendChild(msgIA);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 800);
+        };
+
+        // Reemplazamos el listener del botón enviar
+        btnSend.removeEventListener('click', enviarMensajeOriginal);
+        btnSend.addEventListener('click', enviarMensaje);
+
+        // --- 13. COMPROBAR USUARIO AL CARGAR ---
+                // --- 13. COMPROBAR SESIÓN AL CARGAR LA PÁGINA ---
+        window.addEventListener('load', async () => {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            
+            if (session && session.user) {
+                const nombre = session.user.user_metadata?.nombre || 'Usuario';
+                actualizarEstadoUsuario(nombre);
+            } else {
+                estadoInvitado();
+            }
+        });
+    </script>
+
+</body>
+</html>
